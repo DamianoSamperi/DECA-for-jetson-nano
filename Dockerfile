@@ -38,6 +38,7 @@ RUN pip3 install -r requirements.txt
 # Download required model files
 RUN wget https://github.com/waps101/AlbedoMM/releases/download/v1.0/albedoModel2020_FLAME_albedoPart.npz -P /workspace/DECA/data/ && \
     mv /workspace/DECA/data/albedoModel2020_FLAME_albedoPart.npz /workspace/DECA/data/FLAME_albedo_from_BFM.npz && \
+    pip3 install gdown && \
     gdown --id 1rp8kdyLPvErw2dTmqtjISRVvQLj6Yzje -O /workspace/DECA/data/deca_model.tar
 
 # Remove unnecessary packages and clean cache (excluding model files)
