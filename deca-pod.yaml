@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: deca-pod
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: nano94  # Nome del nodo target
+  restartPolicy: Never
+  containers:
+  - name: deca-container
+    image: dami00/deca
+    imagePullPolicy: Always
+    command: ["bash"]
+    args: ["-c", "sleep infinity"]
+    volumeMounts:
+    - name: deca-data
+      mountPath: /workspace/data
+    - name: cuda
+      mountPath: /usr/local/cuda
+    - name: aarch64-libs
+      mountPath: /usr/lib/aarch64-linux-gnu/
+    resources:
+      limits:
+        nvidia.com/gpu: 1
+  volumes:
+  - name: deca-data
+    hostPath:
+      path: /home/administrator/deca_data
+      type: Directory
+  - name: cuda
+    hostPath:
+      path: /usr/local/cuda
+      type: Directory
+  - name: aarch64-libs
+    hostPath:
+      path: /usr/lib/aarch64-linux-gnu/
+      type: Directory
+
