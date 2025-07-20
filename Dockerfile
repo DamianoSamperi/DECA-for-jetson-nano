@@ -2,9 +2,7 @@ FROM nvcr.io/nvidia/l4t-pytorch:r32.7.1-pth1.10-py3
 
 ENV LANG=C.UTF-8
 ENV PYTHONIOENCODING=utf-8
-ENV LLVM_CONFIG=/usr/bin/llvm-config-10
-ENV CC=/usr/bin/gcc-7
-ENV CXX=/usr/bin/g++-7
+
 
 # Install core dependencies and tools
 RUN sed -i '/kitware.com/d' /etc/apt/sources.list && \
@@ -17,6 +15,8 @@ RUN sed -i '/kitware.com/d' /etc/apt/sources.list && \
     libavcodec-dev libavformat-dev libswscale-dev \
     software-properties-common gnupg && \
     rm -rf /var/lib/apt/lists/* 
+ENV CC=/usr/bin/gcc-7
+ENV CXX=/usr/bin/g++-7
 
 # Install Python dependencies
 RUN pip3 install --upgrade pip setuptools scikit-build && \
@@ -26,6 +26,7 @@ RUN pip3 install --upgrade pip setuptools scikit-build && \
     wget https://apt.llvm.org/llvm.sh && \
     chmod +x llvm.sh && \
     ./llvm.sh 10
+ENV LLVM_CONFIG=/usr/bin/llvm-config-10
 
 WORKDIR /workspace/DECA
 
