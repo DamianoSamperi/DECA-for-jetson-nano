@@ -7,7 +7,7 @@ ENV CC=/usr/bin/gcc-7
 ENV CXX=/usr/bin/g++-7
 
 # Install core dependencies and tools
-RUN sed -i '/kitware.com/d' /etc/apt/sources.list \
+RUN sed -i '/kitware.com/d' /etc/apt/sources.list && \
     apt-get update && apt-get install -y --no-install-recommends \
     wget curl git build-essential \
     python3-pip nano unzip \
