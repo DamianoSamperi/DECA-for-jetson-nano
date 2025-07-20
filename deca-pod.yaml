@@ -21,7 +21,7 @@ spec:
       mountPath: /usr/lib/aarch64-linux-gnu/
     resources:
       limits:
-        nvidia.com/gpu: 1
+        nvidia.com/gpu.shared: 1
   volumes:
   - name: deca-data
     hostPath:
