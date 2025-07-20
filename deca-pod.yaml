@@ -20,7 +20,10 @@ spec:
     - name: aarch64-libs
       mountPath: /usr/lib/aarch64-linux-gnu/
     resources:
+      requests:
+        ephemeral-storage: "2Gi"
       limits:
+        ephemeral-storage: "6Gi"
         nvidia.com/gpu.shared: 1
   volumes:
   - name: deca-data
@@ -35,4 +38,3 @@ spec:
     hostPath:
       path: /usr/lib/aarch64-linux-gnu/
       type: Directory
-
