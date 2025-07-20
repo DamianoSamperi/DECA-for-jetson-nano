@@ -16,12 +16,16 @@ RUN sed -i '/kitware.com/d' /etc/apt/sources.list && \
     libjpeg-dev zlib1g-dev libpython3-dev \
     libavcodec-dev libavformat-dev libswscale-dev \
     software-properties-common gnupg && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* 
 
 # Install Python dependencies
 RUN pip3 install --upgrade pip setuptools scikit-build && \
     pip3 install --only-binary=:all: opencv-python==4.5.5.64 && \
-    pip3 install scikit-image ipykernel jupyterlab jupyter_http_over_ws 'Cython<3' PyYAML==5.1.1 
+    pip3 install scikit-image ipykernel jupyterlab jupyter_http_over_ws 'Cython<3' && \
+    pip3 install --ignore-installed PyYAML==5.1.1 PyYAML==5.1.1 && \
+    wget https://apt.llvm.org/llvm.sh && \
+    chmod +x llvm.sh && \
+    ./llvm.sh 10
 
 WORKDIR /workspace/DECA
 
