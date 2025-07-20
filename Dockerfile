@@ -7,7 +7,8 @@ ENV CC=/usr/bin/gcc-7
 ENV CXX=/usr/bin/g++-7
 
 # Install core dependencies and tools
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN sed -i '/kitware.com/d' /etc/apt/sources.list \
+    apt-get update && apt-get install -y --no-install-recommends \
     wget curl git build-essential \
     python3-pip nano unzip \
     g++-7 gcc-7 \
@@ -20,8 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Install Python dependencies
 RUN pip3 install --upgrade pip setuptools scikit-build && \
     pip3 install --only-binary=:all: opencv-python==4.5.5.64 && \
-    pip3 install scikit-image ipykernel jupyterlab jupyter_http_over_ws 'Cython<3' PyYAML==5.1.1 && \
-    mkdir -p /workspace/DECA/data
+    pip3 install scikit-image ipykernel jupyterlab jupyter_http_over_ws 'Cython<3' PyYAML==5.1.1 
 
 WORKDIR /workspace/DECA
 
